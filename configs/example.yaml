@@ -1,0 +1,44 @@
+# Pinger Configuration Example
+# Define your service endpoints to monitor
+
+# Global settings
+concurrency: 10  # Number of concurrent workers (goroutines)
+timeout: 5s      # Default timeout for all checks
+
+targets:
+  # HTTP/HTTPS endpoints
+  - name: "Google"
+    url: "https://google.com"
+    type: http
+    timeout: 3s
+    expected_status: 200
+
+  - name: "GitHub"
+    url: "https://github.com"
+    type: http
+    expected_status: 200
+
+  - name: "GitHub API"
+    url: "https://api.github.com"
+    type: http
+    expected_status: 200
+    headers:
+      Accept: "application/vnd.github.v3+json"
+
+  # TCP port checks (useful for databases, caches, etc.)
+  - name: "Google DNS TCP"
+    url: "8.8.8.8:53"
+    type: tcp
+    timeout: 2s
+
+  # DNS resolution checks
+  - name: "Google DNS Resolution"
+    url: "google.com"
+    type: dns
+    timeout: 2s
+
+  # Example of a service that might be unhealthy
+  - name: "Example Bad Endpoint"
+    url: "https://httpstat.us/500"
+    type: http
+    expected_status: 200  # This will fail since it returns 500
