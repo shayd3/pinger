@@ -133,7 +133,7 @@ Adding a new check type (gRPC, Redis, etc.) only requires implementing this inte
 ### CLI Enhancements
 - [x] Add `--verbose` flag for detailed output
 - [ ] Add `--silent` flag (only output on failure)
-- [ ] Add `pinger version` command
+- [x] Add `pinger version` command
 - [ ] Add retry logic with configurable attempts (`--retries 3`)
 - [ ] Add `--fail-fast` to exit on first failure
 
