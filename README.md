@@ -70,29 +70,6 @@ targets:
     type: dns
 ```
 
-## Project Structure
-
-```
-pinger/
-├── main.go                    # Entry point
-├── cmd/
-│   ├── root.go                # Cobra root command + global flags
-│   └── check.go               # `pinger check` subcommand
-├── internal/
-│   ├── config/
-│   │   └── config.go          # YAML config parsing
-│   ├── checker/
-│   │   ├── checker.go         # Checker interface + factory
-│   │   ├── result.go          # Result type returned by all checkers
-│   │   ├── http.go            # HTTP/HTTPS health checks
-│   │   ├── tcp.go             # TCP connectivity checks
-│   │   └── dns.go             # DNS resolution checks
-│   └── worker/
-│       └── pool.go            # ⭐ Goroutine worker pool (key learning file)
-└── configs/
-    └── example.yaml           # Example configuration
-```
-
 ## Key Concepts (for learning)
 
 ### Worker Pool (`internal/worker/pool.go`)
