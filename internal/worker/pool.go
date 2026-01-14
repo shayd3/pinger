@@ -43,12 +43,12 @@ func (p *Pool) worker(id int) {
 	defer p.wg.Done()
 
 	for {
-		select {
-		case <-p.ctx.Done():
+		select { // Wait for whichever happens first:
+		case <-p.ctx.Done(): // Context cancelled, exit
 			return
-		case job, ok := <-p.jobs:
+		case job, ok := <-p.jobs: // New job is received
 			if !ok {
-				return
+				return // Channel closed, exit
 			}
 
 			c := checker.New(job.Target.Type)
@@ -57,6 +57,7 @@ func (p *Pool) worker(id int) {
 			result := c.Check(checkCtx, job.Target)
 			cancel()
 
+			// Send results back (with cancellation check)
 			select {
 			case p.results <- result:
 			case <-p.ctx.Done():

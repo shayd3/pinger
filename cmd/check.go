@@ -59,6 +59,13 @@ func runCheck(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("no targets specified. Provide URLs or use -c config.yaml")
 	}
 
+	// Add verbose output here
+	if verbose {
+		fmt.Printf("🔧 Concurrency: %d workers\n", concurrency)
+		fmt.Printf("🎯 Targets: %d endpoints\n", len(targets))
+		fmt.Printf("⏱  Timeout: %ds\n\n", timeout)
+	}
+
 	ctx := context.Background()
 	results := worker.Run(ctx, targets, concurrency)
 
@@ -151,6 +158,13 @@ func outputTable(results []checker.Result) error {
 		fmt.Printf("%-40s %s%s %-10s%s %-10s %-12s %s\n",
 			name, statusColor, statusIcon, string(r.Status), reset,
 			codeStr, latencyStr, errStr)
+
+		if verbose {
+			fmt.Printf("    └─ URL: %s\n", r.URL)
+			if r.Error != "" {
+				fmt.Printf("    └─ Full Error: %s\n", r.Error)
+			}
+		}
 	}
 
 	fmt.Println()
