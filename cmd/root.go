@@ -42,5 +42,5 @@ func init() {
 	rootCmd.PersistentFlags().IntVarP(&concurrency, "concurrency", "n", 10, "number of concurrent workers")
 	rootCmd.PersistentFlags().IntVarP(&timeout, "timeout", "t", 5, "timeout in seconds")
 	rootCmd.PersistentFlags().BoolVar(&jsonOutput, "json", false, "output as JSON")
-	rootCmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "enable verbose output")
+	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "enable verbose output")
 }

@@ -23,6 +23,9 @@ go build -o pinger .
 
 # Adjust concurrency and timeout
 ./pinger check -n 20 -t 10 https://example.com
+
+# Verbose output (shows worker count, target count, and full errors)
+./pinger check -v https://google.com https://github.com
 ```
 
 ### Using a Config File
@@ -128,7 +131,7 @@ Adding a new check type (gRPC, Redis, etc.) only requires implementing this inte
 ## TODO
 
 ### CLI Enhancements
-- [ ] Add `--verbose` flag for detailed output
+- [x] Add `--verbose` flag for detailed output
 - [ ] Add `--silent` flag (only output on failure)
 - [ ] Add `pinger version` command
 - [ ] Add retry logic with configurable attempts (`--retries 3`)
